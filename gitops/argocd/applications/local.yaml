@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/plasterinho/cluster-config.git'
     targetRevision: main
-    path: environments/local
+    path: gitops/environments/local
 
   destination:
     server: 'https://kubernetes.default.svc'
