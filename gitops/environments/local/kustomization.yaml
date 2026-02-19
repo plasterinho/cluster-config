@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - ../../apps/ops-journal/overlays/dev
+  - ingress.yaml
