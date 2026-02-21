@@ -2,11 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ops-journal
-  namespace: default
+
 spec:
   ingressClassName: nginx
   rules:
-    - host: opsjournal.local
+    - host: opsjournal-dev.local
       http:
         paths:
           - path: /

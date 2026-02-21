@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ops-journal-local
+  name: ops-journal-prod
   namespace: argocd
 spec:
   project: default
@@ -9,15 +9,9 @@ spec:
   source:
     repoURL: 'https://github.com/plasterinho/cluster-config.git'
     targetRevision: main
-    path: gitops/environments/local
+    path: gitops/environments/prod
 
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: default
+    namespace: ops-journal-prod
 
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
