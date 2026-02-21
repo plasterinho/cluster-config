@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ops-journal-dev
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: 'https://github.com/plasterinho/cluster-config.git'
+    targetRevision: main
+    path: gitops/environments/dev
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: ops-journal-dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
