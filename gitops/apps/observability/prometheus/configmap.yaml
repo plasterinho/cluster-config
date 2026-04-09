@@ -12,16 +12,16 @@ data:
       - job_name: 'ops-journal'
         static_configs:
           - targets: 
-              - 'ops-journal.ops-journal-dev.svc.cluster.local:80'
+              - 'ops-journal.ops-journal-dev.svc.cluster.local:9113'
             labels:
               env: 'dev'
 
           - targets:
-              - 'ops-journal.ops-journal-staging.svc.cluster.local:80'
+              - 'ops-journal.ops-journal-staging.svc.cluster.local:9113'
             labels:
               env: 'staging'
 
           - targets:
-              - 'ops-journal.ops-journal-prod.svc.cluster.local:80'
+              - 'ops-journal.ops-journal-prod.svc.cluster.local:9113'
             labels:
               env: 'prod'
