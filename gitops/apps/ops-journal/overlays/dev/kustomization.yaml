@@ -8,3 +8,6 @@ patches:
 images:
   - name: ghcr.io/plasterinho/ops-journal
     newTag: sha-605a3f3
+
+  - name: ghcr.io/plasterinho/ops-journal-metrics
+    newTag: sha-605a3f3
