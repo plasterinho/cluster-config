@@ -5,3 +5,6 @@ resources:
 images:
   - name: ghcr.io/plasterinho/ops-journal
     newTag: sha-19b263d
+  
+  - name: ghcr.io/plasterinho/ops-journal-metrics
+    newTag: sha-605a3f3
