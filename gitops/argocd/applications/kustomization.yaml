@@ -5,3 +5,4 @@ resources:
   - ops-journal-dev.yaml
   - ops-journal-staging.yaml
   - ops-journal-prod.yaml
+  - prometheus.yaml
