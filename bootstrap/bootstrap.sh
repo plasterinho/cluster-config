@@ -19,10 +19,13 @@ minikube addons enable csi-hostpath-driver
 echo "Installing ArgoCD..."
 kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
-kubectl apply -n argocd --server-side --force-conflicts \
-  -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.3.1/manifests/install.yaml
+# install argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.3.1/manifests/install.yaml
 
-echo "Bootstrapping root application..."
-kubectl apply -k gitops/argocd/applications/
+# wait for readiness
+kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
+
+# bootstrap gitops
+kubectl apply -f https://raw.githubusercontent.com/plasterinho/cluster-config/main/gitops/argocd/root-app.yaml
 
 echo "Done."
