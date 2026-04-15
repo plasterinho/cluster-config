@@ -6,3 +6,4 @@ resources:
   - ops-journal-staging.yaml
   - ops-journal-prod.yaml
   - prometheus.yaml
+  - grafana.yaml
