@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-K8S_VERSION=v1.35.0
+K8S_VERSION=v1.35.1
 
 echo "Starting minikube..."
 minikube start \
@@ -25,7 +25,11 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v3
 # wait for readiness
 kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
 
+# make sure argocd-server is restarted to pick up the new secret
+kubectl -n argocd get secret argocd-secret >/dev/null 2>&1 || \
+kubectl -n argocd rollout restart deployment argocd-server
+
 # bootstrap gitops
-kubectl apply -f https://raw.githubusercontent.com/plasterinho/cluster-config/main/gitops/argocd/root-app.yaml
+kubectl apply -f https://raw.githubusercontent.com/plasterinho/cluster-config/main/gitops/argocd/applications/root-app.yaml
 
 echo "Done."
