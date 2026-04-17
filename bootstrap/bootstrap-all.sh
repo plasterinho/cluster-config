@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-K8S_VERSION=v1.35.0
+K8S_VERSION=v1.35.1
 ARGO_VERSION=v3.3.1
 REPO="https://github.com/plasterinho/cluster-config.git"
-ROOT_APP_URL="https://raw.githubusercontent.com/plasterinho/cluster-config/main/gitops/argocd/root-app.yaml"
+ROOT_APP_URL="https://raw.githubusercontent.com/plasterinho/cluster-config/main/gitops/argocd/applications/root-app.yaml"
 
 echo "🚀 Starting minikube..."
 minikube start \
@@ -22,7 +22,9 @@ minikube addons enable csi-hostpath-driver
 echo "📥 Installing ArgoCD..."
 kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGO_VERSION}/manifests/install.yaml
+# install argocd with server-side apply to avoid issues with CRD versions
+kubectl apply --server-side -n argocd \
+  -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGO_VERSION}/manifests/install.yaml
 
 echo "⏳ Waiting for ArgoCD to be ready..."
 kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
