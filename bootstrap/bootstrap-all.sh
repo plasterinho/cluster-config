@@ -23,8 +23,7 @@ echo "📥 Installing ArgoCD..."
 kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
 # install argocd with server-side apply to avoid issues with CRD versions
-kubectl apply --server-side -n argocd \
-  -f https://raw.githubusercontent.com/argoproj/argo-cd/v${ARGO_VERSION}/manifests/install.yaml
+kubectl apply --server-side -n argocd -f gitops/argocd/base/install.yaml
 
 echo "⏳ Waiting for ArgoCD to be ready..."
 kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
