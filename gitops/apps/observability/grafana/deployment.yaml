@@ -24,9 +24,24 @@ spec:
       #           secretKeyRef:
       #             name: grafana-admin-password
       #             key: password
-      #     volumeMounts:
-      #       - name: grafana-storage
-      #         mountPath: /var/lib/grafana
-      # volumes:
-      #   - name: grafana-storage
-      #     emptyDir: {}
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /var/lib/grafana
+            - name: dashboards
+              mountPath: /var/lib/grafana/dashboards
+            - name: dashboard-provider
+              mountPath: /etc/grafana/provisioning/dashboards
+            - name: grafana-datasources
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: dashboards
+          configMap:
+            name: grafana-dashboards
+        - name: dashboard-provider
+          configMap:
+            name: grafana-dashboard-providers
+        - name: grafana-datasources
+          configMap:
+            name: grafana-datasources
