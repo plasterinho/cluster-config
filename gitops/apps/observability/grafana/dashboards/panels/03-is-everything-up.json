@@ -1,7 +1,7 @@
 {
   "datasource": {
     "type": "prometheus",
-    "uid": "${DS_PROMETHEUS}"
+    "uid": "prometheus"
   },
   "description": "",
   "fieldConfig": {
@@ -79,7 +79,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "prometheus"
       },
       "editorMode": "builder",
       "exemplar": false,
