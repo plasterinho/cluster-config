@@ -5,3 +5,6 @@ resources:
   - ingress.yaml
   - deployment.yaml
   - service.yaml
+  - dashboards/dashboard.yaml
+  - dashboards/provider.yaml
+  - provisioning/datasources/prometheus.yaml
