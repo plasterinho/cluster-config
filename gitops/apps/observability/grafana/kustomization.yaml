@@ -13,7 +13,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - dashboards/provider.yaml
-  - provisioning/datasources/prometheus.yaml
+  - provisioning/datasources/grafana-datasources.yaml
 
 configMapGenerator:
   - name: grafana-dashboards

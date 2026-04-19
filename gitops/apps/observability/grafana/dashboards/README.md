@@ -1,4 +1,6 @@
-Panel definitions for the Grafana dashboard live in `panels/*.json`.
+# Panel definitions for the Grafana dashboard
+
+Panel definitions live in `panels/*.json`.
 
 `dashboard.base.json` contains the shared dashboard metadata, and
 `build-dashboard.py` combines the base file with the panel files into
