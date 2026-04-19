@@ -18,5 +18,5 @@ Both scripts perform the same steps; they differ only in how they source configu
 To install directly, run:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/plasterinho/cluster-config/main/bootstrap/bootstrap.sh | bash
+curl -sL https://raw.githubusercontent.com/plasterinho/cluster-config/main/bootstrap/bootstrap-all.sh | bash
 ```
