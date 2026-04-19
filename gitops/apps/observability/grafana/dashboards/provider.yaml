@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: grafana-dashboard-providers
   namespace: observability
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 data:
   dashboard-provider.yaml: |
     apiVersion: 1
