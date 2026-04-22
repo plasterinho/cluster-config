@@ -4,9 +4,9 @@
     "h": 1,
     "w": 24,
     "x": 0,
-    "y": 24
+    "y": 32
   },
-  "id": 3,
+  "id": 6,
   "panels": [],
   "title": "Row title",
   "type": "row"

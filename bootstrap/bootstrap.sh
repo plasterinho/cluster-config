@@ -19,8 +19,8 @@ minikube addons enable csi-hostpath-driver
 echo "Installing ArgoCD..."
 kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
 
-# install argocd
-kubectl apply --server-side -n argocd -f gitops/argocd/base/install.yaml
+# install argocd and apply the repo-server copyutil patch via kustomize
+kubectl apply --server-side -k gitops/argocd/base
 
 # wait for readiness
 kubectl wait --for=condition=available deployment/argocd-server -n argocd --timeout=300s
