@@ -32,12 +32,12 @@ spec:
           readinessProbe:
             httpGet:
               path: /metrics
-              port: 9113
+              port: 8000
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /metrics
-              port: 9113
+              port: 8000
             initialDelaySeconds: 15
             periodSeconds: 20
