@@ -7,7 +7,7 @@ patches:
 
 images:
   - name: ghcr.io/plasterinho/ops-journal
-    newTag: sha-aec25cb
+    newTag: sha-7bd7b95
 
   - name: ghcr.io/plasterinho/ops-journal-metrics
-    newTag: sha-aec25cb
+    newTag: sha-7bd7b95
