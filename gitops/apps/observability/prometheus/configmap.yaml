@@ -26,17 +26,17 @@ data:
               env: 'prod'
 
       - job_name: 'ops-journal-nginx'
-        metrics_path: /nginx-metrics
+        metrics_path: /
         static_configs:
           - targets:
-              - 'ops-journal.ops-journal-dev.svc.cluster.local'
+              - 'ops-journal.ops-journal-dev.svc.cluster.local:9113'
             labels:
               env: 'dev'
           - targets:
-              - 'ops-journal.ops-journal-staging.svc.cluster.local'
+              - 'ops-journal.ops-journal-staging.svc.cluster.local:9113'
             labels:
               env: 'staging'
           - targets:
-              - 'ops-journal.ops-journal-prod.svc.cluster.local'
+              - 'ops-journal.ops-journal-prod.svc.cluster.local:9113'
             labels:
               env: 'prod'
