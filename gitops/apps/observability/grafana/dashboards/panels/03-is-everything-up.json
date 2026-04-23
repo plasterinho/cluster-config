@@ -83,7 +83,7 @@
       },
       "editorMode": "builder",
       "exemplar": false,
-      "expr": "up{job=\"ops-journal\"}",
+      "expr": "up{job=\"ops-journal-app\"}",
       "format": "table",
       "instant": false,
       "legendFormat": "{{env}}",
