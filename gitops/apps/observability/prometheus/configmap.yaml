@@ -9,19 +9,34 @@ data:
       scrape_interval: 5s
     
     scrape_configs:
-      - job_name: 'ops-journal'
+      - job_name: 'ops-journal-app'
+        metrics_path: /app-metrics
         static_configs:
-          - targets: 
-              - 'ops-journal.ops-journal-dev.svc.cluster.local:9113'
+          - targets:
+              - 'ops-journal.ops-journal-dev.svc.cluster.local'
             labels:
               env: 'dev'
-
           - targets:
-              - 'ops-journal.ops-journal-staging.svc.cluster.local:9113'
+              - 'ops-journal.ops-journal-staging.svc.cluster.local'
             labels:
               env: 'staging'
-
           - targets:
-              - 'ops-journal.ops-journal-prod.svc.cluster.local:9113'
+              - 'ops-journal.ops-journal-prod.svc.cluster.local'
+            labels:
+              env: 'prod'
+
+      - job_name: 'ops-journal-nginx'
+        metrics_path: /nginx-metrics
+        static_configs:
+          - targets:
+              - 'ops-journal.ops-journal-dev.svc.cluster.local'
+            labels:
+              env: 'dev'
+          - targets:
+              - 'ops-journal.ops-journal-staging.svc.cluster.local'
+            labels:
+              env: 'staging'
+          - targets:
+              - 'ops-journal.ops-journal-prod.svc.cluster.local'
             labels:
               env: 'prod'
