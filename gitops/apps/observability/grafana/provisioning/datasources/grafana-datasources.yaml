@@ -23,3 +23,12 @@ data:
         isDefault: true
         version: 2
         editable: false
+      - name: Loki
+        orgId: 1
+        uid: loki
+        type: loki
+        access: proxy
+        url: http://loki:3100
+        isDefault: false
+        version: 1
+        editable: false
