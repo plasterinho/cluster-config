@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/argoproj/argo-cd.git
+    repoURL: https://github.com/plasterinho/cluster-config 
     targetRevision: HEAD
     path: gitops/apps/observability/loki
   destination:
