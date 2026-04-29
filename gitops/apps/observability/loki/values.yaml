@@ -1,5 +1,37 @@
 loki:
   enabled: true
+  isDefault: false
+  persistence:
+    enabled: false # keep it simple for now
+  config:
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 24h
+
+promtail:
+  enabled: true
+  config:
+    clients:
+      - url: http://loki:3100/loki/api/v1/push
+    positions:
+      filename: /tmp/positions.yaml
+    scrape_configs:
+      - job_name: system
+        static_configs:
+          - targets:
+              - localhost
+            labels:
+              job: varlogs
+              __path__: /var/log/*log
 
 grafana:
-  enabled: false
+  enabled: false # already have it
+
+prometheus:
+  enabled: false # already have it
+
+fluent-bit:
+  enabled: false # not needed for now, promtail is enough
+
+logstash:
+  enabled: false # not needed for now, promtail is enough
