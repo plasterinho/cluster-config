@@ -6,9 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/plasterinho/cluster-config 
-    targetRevision: HEAD
+    repoURL: 'https://github.com/plasterinho/cluster-config'
+    targetRevision: main
     path: gitops/apps/observability/loki
   destination:
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
     namespace: observability
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
