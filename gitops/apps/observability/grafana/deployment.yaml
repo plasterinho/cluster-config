@@ -29,6 +29,13 @@ spec:
               mountPath: /etc/grafana/provisioning/dashboards
             - name: grafana-datasources
               mountPath: /etc/grafana/provisioning/datasources
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
       volumes:
         - name: grafana-storage
           emptyDir: {}

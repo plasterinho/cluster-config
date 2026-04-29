@@ -18,12 +18,26 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
         - name: nginx-exporter
           image: nginx/nginx-prometheus-exporter:1.1.0
           args:
             - "-nginx.scrape-uri=http://localhost/nginx_status"
           ports:
             - containerPort: 9113
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
         - name: metrics
           image: ghcr.io/plasterinho/ops-journal-metrics
           imagePullPolicy: Always
@@ -41,3 +55,10 @@ spec:
               port: 8000
             initialDelaySeconds: 15
             periodSeconds: 20
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
