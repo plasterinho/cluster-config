@@ -7,3 +7,4 @@ resources:
   - ops-journal-prod.yaml
   - prometheus.yaml
   - grafana.yaml
+  - loki.yaml
