@@ -4,3 +4,10 @@ metadata:
   name: ops-journal
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: ops-journal
+  template:
+    metadata:
+      labels:
+        app: ops-journal
