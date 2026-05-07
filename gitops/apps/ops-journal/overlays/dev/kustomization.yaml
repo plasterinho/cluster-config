@@ -14,7 +14,7 @@ patches:
 
 images:
   - name: ghcr.io/plasterinho/ops-journal
-    newTag: sha-ef92236
+    newTag: sha-638b402
 
   - name: ghcr.io/plasterinho/ops-journal-metrics
-    newTag: sha-ef92236
+    newTag: sha-638b402
