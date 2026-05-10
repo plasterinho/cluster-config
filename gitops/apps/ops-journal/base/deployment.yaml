@@ -12,6 +12,7 @@ spec:
       labels:
         app: ops-journal
     spec:
+      serviceAccountName: ops-journal
       containers:
         - name: ops-journal
           image: ghcr.io/plasterinho/ops-journal
