@@ -7,6 +7,9 @@ loki:
     table_manager:
       retention_deletes_enabled: true
       retention_period: 24h
+    limits_config:
+      volume_enabled: true
+      enforce_metric_name: false
   limits_config:
     enforce_metric_name: false
 
