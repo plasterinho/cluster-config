@@ -7,117 +7,60 @@ spec:
   project: default
   source:
     repoURL: https://grafana.github.io/helm-charts
-    chart: loki-stack
-    targetRevision: 2.10.2
+    chart: loki
+    targetRevision: 7.0.0
     helm:
       values: |
+        deploymentMode: SingleBinary
+
         loki:
-          enabled: true
-          isDefault: false
+          auth_enabled: false
+          commonConfig:
+            replication_factor: 1
+          storage:
+            type: filesystem
+          schemaConfig:
+            configs:
+              - from: 2024-04-01
+                store: tsdb
+                object_store: filesystem
+                schema: v13
+                index:
+                  prefix: index_
+                  period: 24h
+          limits_config:
+            reject_old_samples: true
+            reject_old_samples_max_age: 168h
+            volume_enabled: true
+
+        singleBinary:
+          replicas: 1
           persistence:
-            enabled: false # keep it simple for now
-          config:
-            table_manager:
-              retention_deletes_enabled: true
-              retention_period: 24h
+            enabled: false
 
-        promtail:
-          enabled: true
-          config:
-            clients:
-              - url: http://loki:3100/loki/api/v1/push
-            positions:
-              filename: /tmp/positions.yaml
-            snippets:
-              scrapeConfigs: |
-                - job_name: kubernetes-pods
-                  pipeline_stages:
-                    - docker: {}
-                    - drop:
-                        expression: '.*GET /(app-)?metrics HTTP/1\.1.*'
-                  kubernetes_sd_configs:
-                    - role: pod
-                  relabel_configs:
-                    - action: keep
-                      source_labels:
-                        - __meta_kubernetes_namespace
-                      regex: ops-journal.*
-                    - source_labels:
-                        - __meta_kubernetes_pod_controller_name
-                      regex: ([0-9a-z-.]+?)(-[0-9a-f]{8,10})?
-                      action: replace
-                      target_label: __tmp_controller_name
-                    - source_labels:
-                        - __meta_kubernetes_pod_label_app_kubernetes_io_name
-                        - __meta_kubernetes_pod_label_app
-                        - __tmp_controller_name
-                        - __meta_kubernetes_pod_name
-                      regex: ^;*([^;]+)(;.*)?$
-                      action: replace
-                      target_label: app
-                    - source_labels:
-                        - __meta_kubernetes_pod_label_app_kubernetes_io_instance
-                        - __meta_kubernetes_pod_label_instance
-                      regex: ^;*([^;]+)(;.*)?$
-                      action: replace
-                      target_label: instance
-                    - source_labels:
-                        - __meta_kubernetes_pod_label_app_kubernetes_io_component
-                        - __meta_kubernetes_pod_label_component
-                      regex: ^;*([^;]+)(;.*)?$
-                      action: replace
-                      target_label: component
-                    - action: replace
-                      source_labels:
-                        - __meta_kubernetes_pod_node_name
-                      target_label: node_name
-                    - action: replace
-                      source_labels:
-                        - __meta_kubernetes_namespace
-                      target_label: namespace
-                    - action: replace
-                      replacement: $1
-                      separator: /
-                      source_labels:
-                        - namespace
-                        - app
-                      target_label: job
-                    - action: replace
-                      source_labels:
-                        - __meta_kubernetes_pod_name
-                      target_label: pod
-                    - action: replace
-                      source_labels:
-                        - __meta_kubernetes_pod_container_name
-                      target_label: container
-                    - action: replace
-                      replacement: /var/log/pods/*$1/*.log
-                      separator: /
-                      source_labels:
-                        - __meta_kubernetes_pod_uid
-                        - __meta_kubernetes_pod_container_name
-                      target_label: __path__
-                    - action: replace
-                      regex: true/(.*)
-                      replacement: /var/log/pods/*$1/*.log
-                      separator: /
-                      source_labels:
-                        - __meta_kubernetes_pod_annotationpresent_kubernetes_io_config_hash
-                        - __meta_kubernetes_pod_annotation_kubernetes_io_config_hash
-                        - __meta_kubernetes_pod_container_name
-                      target_label: __path__
+        read:
+          replicas: 0
 
-        grafana:
-          enabled: false # already have it
+        write:
+          replicas: 0
 
-        prometheus:
-          enabled: false # already have it
+        backend:
+          replicas: 0
 
-        fluent-bit:
-          enabled: false # not needed for now, promtail is enough
+        gateway:
+          enabled: false
 
-        logstash:
-          enabled: false # not needed for now, promtail is enough
+        chunksCache:
+          enabled: false
+
+        resultsCache:
+          enabled: false
+
+        lokiCanary:
+          enabled: false
+
+        test:
+          enabled: false
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: observability
