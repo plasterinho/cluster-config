@@ -11,17 +11,6 @@ spec:
     targetRevision: 6.17.1
     helm:
       values: |
-        initContainer:
-          - name: init
-            image: docker.io/busybox:1.33
-            imagePullPolicy: IfNotPresent
-            command:
-              - sh
-              - -c
-              - sysctl -w fs.inotify.max_user_instances=128
-            securityContext:
-              privileged: true
-
         config:
           clients:
             - url: http://loki:3100/loki/api/v1/push
