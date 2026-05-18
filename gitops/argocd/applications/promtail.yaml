@@ -11,6 +11,9 @@ spec:
     targetRevision: 6.17.1
     helm:
       values: |
+        image:
+          tag: 2.8.0
+
         config:
           clients:
             - url: http://loki:3100/loki/api/v1/push
